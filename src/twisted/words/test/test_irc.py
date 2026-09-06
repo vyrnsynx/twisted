@@ -1537,11 +1537,8 @@ class BasicServerFunctionalityTests(IRCTestCase):
         """
         An explicitly configured hostname is not replaced on connection.
         """
-
-        class ConfiguredIRC(irc.IRC):
-            hostname = "configured.example"
-
-        protocolInstance = ConfiguredIRC()
+        protocolInstance = irc.IRC()
+        protocolInstance.hostname = "configured.example"
         transport = protocol.FileWrapper(StringIOWithoutClosing())
         protocolInstance.makeConnection(transport)
         self.assertEqual(protocolInstance.hostname, "configured.example")
